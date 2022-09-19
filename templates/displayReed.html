@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="col-11 mx-auto mt-4 c">
+
+    <ul class="lists">
+        <li>Name: {{ name }}</li>
+        <li>Symbol: {{ symbol }}</li>
+        <li>Contract: {{ contract }}</li>
+        <li>Total Supply: {{ totalSupplyFormated }}</li>
+        <li>Balance: {{ balance }}</li>
+    </ul>
+
+</div>
+{% endblock %}

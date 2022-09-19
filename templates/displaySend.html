@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="col-11 mx-auto mt-4 c">
+
+    <h3>Sended ${{ amount }} /// New Balance ${{ balance }}</h3>
+    <h3>From {{ send_wallet }}</h3>
+    <h3>To {{ address }}</h3>
+    <hr>
+    <h3>Transaction success, outcome Hash</h3>
+    <h3>{{ hash }}</h3>
+
+</div>
+{% endblock %}

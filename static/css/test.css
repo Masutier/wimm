@@ -1,0 +1,48 @@
+.back{
+    background: #0f0c29;
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+}
+
+.rotate {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.bordetop{
+    border-top: 5px solid #23b8c1;
+}
+
+.borderig{
+    border-right: 5px solid #23b8c1;
+}
+
+.bordebot{
+    border-bottom: 5px solid #23b8c1;
+}
+
+.bordelef{
+    border-left: 5px solid #23b8c1;
+}
+
+.boximg{
+    border-radius: 50%;
+    background: #302b63;
+    box-shadow: inset 15px 15px 28px #1a1735, 
+                inset -15px -15px 28px #463f91;
+    padding: 2rem;
+}
+
+.boxtext1{
+    color: #a5a6ad !important;
+    border-radius: 52px;
+    background: #302b63;
+    box-shadow: inset 15px 15px 28px #1a1735, 
+                inset -15px -15px 28px #463f91;
+    margin-top: 2rem;
+    margin-left: 1rem;
+}
