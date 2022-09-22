@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="col-11 mx-auto mt-4 c">
+    <h2>infura {{ endpoint }}</h2>
+
+    <ul class="lists">
+        <li>Balance: {{ balance }}</li>
+        <li>Block Number: {{ blockNumber }}</li>
+        <li>Wei Balance: {{ weiBalance }}</li>
+    </ul>
+
+</div>
+{% endblock %}
