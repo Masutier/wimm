@@ -3,21 +3,25 @@
 {% block content %}
 <div class="col-11 mx-auto mt-4 c">
     <h2>Infura Test Nets</h2>
-    <div class="col-1 mx-auto mt-4 c">
+    <div class="col-10 mx-auto mt-4 c">
         <form method="POST">
-            <div class="form-check">
+            <div class="col-5 mx-auto mt-5 mb-3">
+                <label for="Input1" class="form-label">Address</label>
+                <input type="text" class="form-control" id="Input1" name="address" placeholder="0xFC58C26caf80ef....">
+            </div>
+            <div class="col-2 mx-auto form-check">
                 <input class="form-check-input" type="radio" name="options" id="options1" value="option1" checked>
                 <label class="form-check-label" for="options1">
                     Main Net
                 </label>
             </div>
-            <div class="form-check">
+            <div class="col-2 mx-auto form-check">
                 <input class="form-check-input" type="radio" name="options" id="options2" value="option2">
                 <label class="form-check-label" for="options2">
                     Kovan Net
                 </label>
             </div>
-            <div class="form-check">
+            <div class="col-2 mx-auto form-check">
                 <input class="form-check-input" type="radio" name="options" id="options3" value="option3">
                 <label class="form-check-label" for="options3">
                     Rinkeby Net

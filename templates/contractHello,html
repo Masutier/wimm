@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="col-11 mx-auto mt-4 c">
+    <h2>Contract Id {{ contract_id }}</h2>
+
+    <h4>Contract Bin</h4>
+    <p class="text-break">{{ bin }}</p>
+    <h4>Contract Abi</h4>
+    <p class="text-break">{{ abi }}</p>
+
+</div>
+{% endblock %}

@@ -1,8 +1,10 @@
 import os
 import json
-from flask import Flask, request, redirect, flash, render_template as render
-from web3 import Web3
+from flask import Flask, request, redirect, jsonify, flash, render_template as render
 from pathlib import Path
+
+from web3 import Web3
+from solcx import compile_source
 
 with open('/home/gabriel/prog/json_config/wimm.json') as config_file:
     config = json.load(config_file)
@@ -32,28 +34,25 @@ def home():
 def infuraBlock():
     if request.method == "POST":
         option = request.form.getlist('options')
-
         if option == ['option1']:
             web3 = Web3(Web3.HTTPProvider(config['INFURA_URL']))
             endpoint = "Infura Main Net"
-
         elif option == ['option2']:
             web3 = Web3(Web3.HTTPProvider(config['KOVAN_URL']))
             endpoint = "Infura Kovan Net"
-
         elif option == ['option3']:
             web3 = Web3(Web3.HTTPProvider(config['RINKEBY_URL']))
             endpoint = "Infura Rinkeby Net"
-
         else:
             flash("Something went wrong, please try again")
             return redirect('infuraPoint.html')
-
-        balance = web3.eth.getBalance("0xFC58C26caf80ef110B4552C1AcCb0986de5142F3")
+        address = request.form.get("address")
+        yes = web3.isAddress(address)
+        balance = web3.eth.getBalance(address)
         blockNumber = web3.eth.blockNumber
         weiBalance = web3.fromWei(balance, "ether")
 
-        context = {"balance":balance, "blockNumber":blockNumber, "weiBalance":weiBalance, "endpoint":endpoint}
+        context = {"balance":balance, "blockNumber":blockNumber, "weiBalance":weiBalance, "endpoint":endpoint, "yes":yes}
         return render('displayNet.html', **context)
 
     return render('infuraPoint.html')
@@ -121,6 +120,33 @@ def send_transaction():
         return render('displaySend.html', **context)
 
     return render('sendTran.html')
+
+
+@app.route('/contract')
+def contractHello():
+    # we can code the contract in https://remix.ethereum.org to verify the format is good and copy here beteen """ """
+    
+    compiled_solidity = compile_source(
+        """
+        // SPDX-License-Identifier: MIT
+        pragma solidity 0.8.14;
+        contract HelloWorld {
+            string public message;
+            constructor() {message = "Hello World";}
+            function setMessage(string memory _message) public {message = _message;}
+            function sayMessage() view public returns (string memory) {return message;}
+        }
+        """,
+        output_values = ['abi', 'bin']
+    )
+
+    contract_id, contract_interface = compiled_solidity.popitem()
+    abi = contract_interface['abi']
+    bin = contract_interface['bin']
+
+    context = {"abi":abi, "bin":bin, "contract_id":contract_id}
+    return render('contractHello,html', **context)
+    # return jsonify(compiled_solidity)
 
 
 if __name__ == '__main__':

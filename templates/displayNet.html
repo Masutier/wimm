@@ -4,6 +4,10 @@
 <div class="col-11 mx-auto mt-4 c">
     <h2>infura {{ endpoint }}</h2>
 
+    {% if yes %}
+    <h4>The address have the correct format</h4>
+    {% endif %}
+
     <ul class="lists">
         <li>Balance: {{ balance }}</li>
         <li>Block Number: {{ blockNumber }}</li>
