@@ -22,12 +22,25 @@ def home():
     send_wallet = config["SENDER_WALLET"]
     private_key = config["PRIVATE_KEY"]
     web3 = Web3(Web3.HTTPProvider(ganache_url))
-    # get balance
-    wei_balance = web3.eth.get_balance(send_wallet)
-    balance = web3.fromWei(wei_balance, 'ether')
 
-    context = {"send_wallet":send_wallet, "balance":balance}
-    return render('home.html', **context)
+    if web3.isConnected():
+        # get balance
+        wei_balance = web3.eth.get_balance(send_wallet)
+        balance = web3.fromWei(wei_balance, 'ether')
+        endpoint = "Ganache Local Blockchain"
+
+        context = {"send_wallet":send_wallet, "balance":balance, "endpoint":endpoint}
+        return render('home.html', **context)
+    else:
+        web3 = Web3(Web3.HTTPProvider(config['INFURA_URL']))
+        address = config["SENDER_WALLET"]
+        wei_balance = web3.eth.getBalance(address)
+        balance = web3.fromWei(wei_balance, 'ether')
+        endpoint = "Infura Main Net"
+
+        flash("Please connect to local provider")
+        context = {"send_wallet":address, "balance":balance, "endpoint":endpoint}
+        return render('home.html', **context)
 
 
 @app.route('/infuraPoint', methods=['GET', 'POST'])
